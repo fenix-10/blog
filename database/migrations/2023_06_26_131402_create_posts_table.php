@@ -18,8 +18,8 @@ return new class extends Migration
 
             $table->foreignId('category_id')->nullable()
                 ->index()
-                ->constrained('categories')
-                ->references('id');
+                ->constrained('categories');
+
 
             $table->timestamps();
 
