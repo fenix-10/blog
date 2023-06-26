@@ -18,15 +18,12 @@ return new class extends Migration
 //            POST_FK
             $table->foreignId('post_id')
                 ->index()
-                ->constrained('posts')
-                ->references('id');
+                ->constrained('posts');
 
 //            TAG_FK
             $table->foreignId('tag_id')
                 ->index()
-                ->constrained('tags')
-                ->references('id');
-
+                ->constrained('tags');
 
 
             $table->timestamps();
