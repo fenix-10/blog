@@ -25,7 +25,7 @@
                 <!-- Info boxes -->
                 <div class="row">
                     <div class="col-12">
-                        <form action="{{ route('admin.category.update', $category->id) }}" method="POST" class="w-25">
+                        <form action="{{ route('admin.categories.update', $category->id) }}" method="POST" class="w-25">
                             @csrf
                             @method('PATCH')
                             <div class="form-group">
