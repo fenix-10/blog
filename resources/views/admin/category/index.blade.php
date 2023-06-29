@@ -25,7 +25,7 @@
                 <!-- Info boxes -->
                 <div class="row">
                     <div class="col-1 mb-3">
-                        <a href="{{ route('admin.categories.create') }}" class="btn btn-block btn-primary">Добавить</a>
+                        <a href="{{ route('admin.category.create') }}" class="btn btn-block btn-primary">Добавить</a>
                     </div>
                 </div>
                 <div class="row">
@@ -46,12 +46,12 @@
                                         <tr>
                                             <td>{{ $category->id }}</td>
                                             <td>{{ $category->title }}</td>
-                                            <td class="text-center"><a href="{{ route('admin.categories.show', $category->id) }}"><i
+                                            <td class="text-center"><a href="{{ route('admin.category.show', $category->id) }}"><i
                                                         class="fas fa-solid fa-eye"></i></a></td>
-                                            <td class="text-center"><a href="{{ route('admin.categories.edit', $category->id) }}"
+                                            <td class="text-center"><a href="{{ route('admin.category.edit', $category->id) }}"
                                                    class="text-success"><i class="fas fa-solid fa-pen"></i></a></td>
                                             <td class="text-center">
-                                                <form action="{{ route('admin.categories.delete', $category->id) }}"
+                                                <form action="{{ route('admin.category.delete', $category->id) }}"
                                                       method="POST">
                                                     @csrf
                                                     @method('DELETE')
