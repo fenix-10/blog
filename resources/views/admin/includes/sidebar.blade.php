@@ -6,7 +6,15 @@
             <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
             <li class="nav-item">
-                <a href="{{ route('admin.categories.index') }}" class="nav-link">
+                <a href="{{ route('admin.post.index') }}" class="nav-link">
+                    <i class="nav-icon fas fa-solid fa-clipboard"></i>
+                    <p>
+                        Посты
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.category.index') }}" class="nav-link">
                     <i class="nav-icon fas fa-solid fa-bars"></i>
                     <p>
                         Категории
