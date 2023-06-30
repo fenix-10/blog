@@ -33,21 +33,21 @@
                                        value="{{ $post->title }}">
                                 @error('title')
                                 <div class="text-danger">
-                                    Это поле необходимо для заполнения
+                                    {{ $message }}
                                 </div>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <textarea id="summernote" name="content">
-                                    {{ $post->content }}
+                                    {{ $message }}
                                 </textarea>
                                 @error('content')
                                 <div class="text-danger">
-                                    Это поле необходимо для заполнения
+                                    {{ $message }}
                                 </div>
                                 @enderror
                             </div>
-                            <div class="form-group w-25">
+                            <div class="form-group">
                                 <label for="exampleInputFile">Добавить превью</label>
                                 <div class="w-25 mb-3">
                                     <img src="{{ url('storage/' . $post->preview_image) }}" alt="preview_image">
@@ -64,11 +64,11 @@
 
                                 @error('preview_image')
                                 <div class="text-danger">
-                                    Выберите изображение
+                                    {{ $message }}
                                 </div>
                                 @enderror
                             </div>
-                            <div class="form-group w-25">
+                            <div class="form-group">
                                 <label for="exampleInputFile">Добавить главное изображение</label>
                                 <div class="w-25 mb-3">
                                     <img src="{{ url('storage/' . $post->main_image) }}" alt="main_image">
@@ -84,7 +84,7 @@
                                 </div>
                                 @error('preview_image')
                                 <div class="text-danger">
-                                    Выберите изображение
+                                    {{ $message }}
                                 </div>
                                 @enderror
                             </div>
