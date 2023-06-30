@@ -25,22 +25,93 @@
                 <!-- Info boxes -->
                 <div class="row">
                     <div class="col-12">
-                        <form action="{{ route('admin.post.update', $post->id) }}" method="POST" class="w-25">
+                        <form action="{{ route('admin.post.update', $post->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="title" placeholder="Название поста" value="{{ $category->title}}">
+                            <div class="form-group w-25">
+                                <input type="text" class="form-control" name="title" placeholder="Название поста"
+                                       value="{{ $post->title }}">
                                 @error('title')
-                                    <div class="text-danger">
-                                        Это поле необходимо для заполнения
-                                    </div>
+                                <div class="text-danger">
+                                    Это поле необходимо для заполнения
+                                </div>
                                 @enderror
                             </div>
-                            <input type="submit" class="btn btn-primary" value="Обновить">
+                            <div class="form-group">
+                                <textarea id="summernote" name="content">
+                                    {{ $post->content }}
+                                </textarea>
+                                @error('content')
+                                <div class="text-danger">
+                                    Это поле необходимо для заполнения
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="form-group w-25">
+                                <label for="exampleInputFile">Добавить превью</label>
+                                <div class="w-25 mb-3">
+                                    <img src="{{ url('storage/' . $post->preview_image) }}" alt="preview_image">
+                                </div>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" name="preview_image">
+                                        <label class="custom-file-label">Выберите изображение</label>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">Загрузка</span>
+                                    </div>
+                                </div>
+
+                                @error('preview_image')
+                                <div class="text-danger">
+                                    Выберите изображение
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="form-group w-25">
+                                <label for="exampleInputFile">Добавить главное изображение</label>
+                                <div class="w-25 mb-3">
+                                    <img src="{{ url('storage/' . $post->main_image) }}" alt="main_image">
+                                </div>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" name="main_image">
+                                        <label class="custom-file-label">Выберите изображение</label>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">Загрузка</span>
+                                    </div>
+                                </div>
+                                @error('preview_image')
+                                <div class="text-danger">
+                                    Выберите изображение
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="form-group w-50">
+                                <label>Выберите категорию</label>
+                                <select name="category_id" class="form-control">
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}"
+                                            {{ $category->id == $post->category_id ? ' selected' : '' }}
+                                        >{{ $category->title }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Теги</label>
+                                <select class="select2" name="tag_ids[]" multiple="multiple" data-placeholder="Выберите теги"
+                                        style="width: 100%;">
+                                    @foreach($tags as $tag)
+                                        <option {{ is_array($post->tags->pluck('id')->toArray() ) && in_array($tag->id, $post->tags->pluck('id')->toArray() ) ? ' selected' : ''}} value="{{ $tag->id }}">{{ $tag->title }}</option>
+                                @endforeach
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-primary mt-3" value="Обновить">
+                            </div>
                         </form>
                     </div>
                 </div>
-
             </div><!--/. container-fluid -->
         </section>
         <!-- /.content -->
