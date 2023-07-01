@@ -39,7 +39,7 @@
                             </div>
                             <div class="form-group">
                                 <textarea id="summernote" name="content">
-                                    {{ $message }}
+{{--                                    {{ $message }}--}}
                                 </textarea>
                                 @error('content')
                                 <div class="text-danger">
