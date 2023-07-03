@@ -10,8 +10,9 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard v2</li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.main.index') }}">Главная</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.user.index') }}">Пользователи</a></li>
+                            <li class="breadcrumb-item active">Редактирование пользователя</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -43,6 +44,22 @@
                                     {{ $message }}
                                 </div>
                                 @enderror
+                            </div>
+                            <div class="form-group w-50">
+                                <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                    <label>Выберите роль</label>
+                                    <select name="role" class="form-control">
+                                        @foreach($roles as $id => $role)
+                                            <option value="{{ $id }}"
+                                                {{ $id == $user->role ? ' selected' : '' }}
+                                            >{{ $role }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('role')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
                             </div>
                             <input type="submit" class="btn btn-primary" value="Обновить">
                         </form>
