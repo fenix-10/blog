@@ -18,9 +18,22 @@ Route::group(['namespace' => 'App\Http\Controllers\Main'], function () {
     Route::get('/', IndexController::class);
 });
 
-Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin'], function () {
+Route::group(['namespace' => 'App\Http\Controllers\Personal', 'prefix' => 'personal', 'middleware' => ['auth', 'verified']], function () {
+    Route::group(['namespace' => 'Main', 'prefix' => 'main'], function () {
+        Route::get('/', \App\Http\Controllers\Personal\Main\IndexController::class)->name('personal.main.index');
+    });
+    Route::group(['namespace' => 'Liked', 'prefix' => 'liked'], function () {
+        Route::get('/', \App\Http\Controllers\Personal\Liked\IndexController::class)->name('personal.liked.index');
+    });
+    Route::group(['namespace' => 'Comment', 'prefix' => 'comment'], function () {
+        Route::get('/', \App\Http\Controllers\Personal\Comment\IndexController::class)->name('personal.comment.index');
+    });
+});
+
+
+Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'admin', 'verified']], function () {
     Route::group(['namespace' => 'Main'], function () {
-        Route::get('/', \App\Http\Controllers\Admin\Main\IndexController::class);
+        Route::get('/', \App\Http\Controllers\Admin\Main\IndexController::class)->name('admin.main.index');
     });
     Route::group(['namespace' => 'Category', 'prefix' => 'categories'], function () {
         Route::get('/', \App\Http\Controllers\Admin\Category\IndexController::class)->name('admin.category.index');
@@ -64,5 +77,5 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin'],
 });
 
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
