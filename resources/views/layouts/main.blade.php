@@ -15,7 +15,7 @@
 <body>
 <div class="edica-loader"></div>
 <header class="edica-header">
-    <div class="container">
+    <div class="container" >
         <nav class="navbar navbar-expand-lg navbar-light">
             <a class="navbar-brand" href="index.html"><img src="{{ asset('assets/images/logo.svg') }}" alt="Edica"></a>
             <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#edicaMainNav" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,6 +26,25 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="{{ route('main.index') }}">Блог <span class="sr-only">(current)</span></a>
                     </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ route('category.index') }}">Категории <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        @auth()
+                            <a class="nav-link" href="{{ route('personal.main.index') }}">Личный кабинет <span class="sr-only">(current)</span></a>
+                        @endauth
+                        @guest()
+                        <a class="nav-link" href="{{ route('personal.main.index') }}">Войти <span class="sr-only">(current)</span></a>
+                            @endguest
+                    </li>
+                    <li class="nav-item active">
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                        @auth()
+                                <input class="btn btn-outline-danger" type="submit" value="Выйти">
+                        @endauth
+                    </li>
+                    </form>
                 </ul>
             </div>
         </nav>
